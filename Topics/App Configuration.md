@@ -1,8 +1,8 @@
 # [Azure App Configuration](https://learn.microsoft.com/en-us/azure/azure-app-configuration/)
 
-Azure App Configuration centralizes app settings and feature flags, making it easier to manage hierarchical configurations across different settings and locations. It allows real-time updates without needing to restart the app. While it _encrypts all data_, it lacks the advanced security features of Azure Key Vault, such as hardware-level encryption, granular access policies, and management environments.
+**_Azure App Configuration centralizes app settings and feature flags, making it easier to manage hierarchical configurations across different settings and locations. It allows real-time updates without needing to restart the app. While it _encrypts all data_, it lacks the advanced security features of Azure Key Vault, such as hardware-level encryption, granular access policies, and management environments.
 
-You can import and export configuration between Azure App Configuration and separate files. It also supports separate stores for different development stages like testing and production.
+You can import and export configuration between Azure App Configuration and separate files. It also supports separate stores for different development stages like testing and production._**
 
 ## Azure App Configuration Overview
 
