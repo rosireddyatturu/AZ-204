@@ -185,16 +185,16 @@ The feature manager supports _appsettings.json_ as a configuration source for fe
 
 ##### Enable customer-managed key capability
 
-**_The following components are required to successfully enable the customer-managed key capability for Azure App Configuration:
+The following components are required to successfully enable the customer-managed key capability for Azure App Configuration:
 
-- Standard tier Azure App Configuration instance
-- Azure Key Vault with soft-delete and purge-protection features enabled
-- An RSA or RSA-HSM key within the Key Vault: The key must not be expired, it must be enabled, and it must have both wrap and unwrap capabilities enabled
+- **_Standard tier Azure App Configuration instance_**
+- **_Azure Key Vault with soft-delete and purge-protection features enabled_**
+- **_An RSA or RSA-HSM key within the Key Vault: The key must not be expired, it must be enabled, and it must have both wrap and unwrap capabilities enabled_**
 
 Once these resources are configured, two steps remain to allow Azure App Configuration to use the Key Vault key:
 
-- Assign a managed identity to the Azure App Configuration instance
-- Grant the identity `GET`, `WRAP`, and `UNWRAP` permissions in the target Key Vault's access policy._**
+- **_Assign a managed identity to the Azure App Configuration instance_**
+- **_Grant the identity `GET`, `WRAP`, and `UNWRAP` permissions in the target Key Vault's access policy_**.
 
 #### Use private endpoints for Azure App Configuration
 
