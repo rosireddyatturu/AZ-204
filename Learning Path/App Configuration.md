@@ -183,6 +183,9 @@ The feature manager supports _appsettings.json_ as a configuration source for fe
 
 **_Azure App Configuration encrypts sensitive information at rest using a 256-bit AES encryption key provided by Microsoft. Every App Configuration instance has its own encryption key managed by the service and used to encrypt sensitive information. Sensitive information includes the values found in key-value pairs. When customer-managed key capability is enabled, App Configuration uses a managed identity assigned to the App Configuration instance to authenticate with Microsoft Entra ID. The managed identity then calls Azure Key Vault and wraps the App Configuration instance's encryption key. The wrapped encryption key is then stored and the unwrapped encryption key is cached within App Configuration for one hour. App Configuration refreshes the unwrapped version of the App Configuration instance's encryption key hourly. This ensures availability under normal operating conditions._**
 
+**Key Rotation Support:**
+_If you rotate (change) your customer-managed key in Azure Key Vault, App Configuration will pick up the new key within an hour. This ensures that encryption and decryption always use the latest, valid key—even if you change it unexpectedly or as part of a security policy._
+
 ##### Enable customer-managed key capability
 
 The following components are required to successfully enable the customer-managed key capability for Azure App Configuration:
