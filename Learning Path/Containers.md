@@ -199,7 +199,7 @@ This example container group:
 - Consists of two containers. One container listens on port 80, while the other listens on port 5000.
 - Includes two Azure file shares as volume mounts, and each container mounts one of the shares locally.
 
-:information_source: Multi-container groups currently support only Linux containers. For Windows containers, Azure Container Instances only supports deployment of a single instance.
+**_:information_source: Multi-container groups currently support only Linux containers. For Windows containers, Azure Container Instances only supports deployment of a single instance._**
 
 #### Deployment
 
@@ -215,23 +215,22 @@ Container groups share an IP address and a port namespace on that IP address. To
 
 #### Storage
 
-You can specify external volumes to mount within a container group. You can map those volumes into specific paths within the individual containers in a group. Supported volumes include:
+**You can specify external volumes to mount within a container group. You can map those volumes into specific paths within the individual containers in a group. Supported volumes include:**
 
-- Azure file share
-- Secret
-- Empty directory
-- Cloned git repo
+- **Azure file share**
+- **Secret**
+- **Empty directory**
+- **Cloned git repo**
 
 #### Common scenarios
 
 Multi-container groups are useful in cases where you want to divide a single functional task into a few container images. These images can then be delivered by different teams and have separate resource requirements.
 
-Example usage could include:
-
+**_Example usage could include:_**
 - A container serving a web application and a container pulling the latest content from source control.
-- An application container and a logging container. The logging container collects the logs and metrics output by the main application and writes them to long-term storage.
-- An application container and a monitoring container. The monitoring container periodically makes a request to the application to ensure that it's running and responding correctly, and raises an alert if it's not.
-- A front-end container and a back-end container. The front end might serve a web application, with the back end running a service to retrieve data.
+- An **application container and a logging container**. The **logging container collects the logs and metrics output by the main application and writes them to long-term storage**.
+- An application container and a monitoring container. T**he monitoring container periodically makes a request to the application to ensure that it's running and responding correctly, and raises an alert if it's not**.
+- A **front-end container and a back-end container**. The front end might serve a web application, with the back end running a service to retrieve data.
 
 ### Run containerized tasks with restart policies
 
@@ -245,9 +244,9 @@ When you create a container group in Azure Container Instances, you can specify 
 
 | Restart policy | Description                                                                                                                                                                                |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Always         | Containers in the container group are always restarted. This is the default setting applied when no restart policy is specified at container creation.                                     |
-| Never          | Containers in the container group are never restarted. The containers run at most once.                                                                                                    |
-| OnFailure      | Containers in the container group are restarted only when the process executed in the container fails (when it terminates with a nonzero exit code). The containers are run at least once. |
+| **Always**         | Containers in the container group are always restarted. This is the default setting applied when no restart policy is specified at container creation.                                     |
+|**Never**          | Containers in the container group are never restarted. The containers run at most once.                                                                                                    |
+| **OnFailure**      | Containers in the container group are restarted only when the process executed in the container fails (when it terminates with a nonzero exit code). The containers are run at least once. |
 
 #### Specify a restart policy
 
@@ -324,13 +323,13 @@ az container create --resource-group myResourceGroup \
 
 ### Mount an Azure file share in Azure Container Instances
 
-By default, Azure Container Instances are stateless. If the container crashes or stops, all of its state is lost. To persist state beyond the lifetime of the container, you must mount a volume from an external store. As shown in this unit, Azure Container Instances can mount an Azure file share created with Azure Files. Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol. Using an Azure file share with Azure Container Instances provides file-sharing features similar to using an Azure file share with Azure virtual machines.
+**_By default, Azure Container Instances are stateless. If the container crashes or stops, all of its state is lost. To persist state beyond the lifetime of the container, you must mount a volume from an external store. As shown in this unit, Azure Container Instances can mount an Azure file share created with Azure Files. Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol. Using an Azure file share with Azure Container Instances provides file-sharing features similar to using an Azure file share with Azure virtual machines._**
 
 #### Limitations
 
-- You can only mount Azure Files shares to Linux containers.
-- Azure file share volume mount requires the Linux container run as root.
-- Azure File share volume mounts are limited to CIFS support.
+- **You can only mount Azure Files shares to Linux containers**.
+- **Azure file share volume mount requires the Linux container run as root.**
+- **Azure File share volume mounts are limited to CIFS support**.
 
 #### Deploy container and mount volume
 
