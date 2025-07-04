@@ -478,27 +478,27 @@ Reasons to deploy container apps to different environments include situations wh
 
 #### Microservices with Azure Container Apps
 
-Microservice architectures allow you to independently develop, upgrade, version, and scale core areas of functionality in an overall system. Azure Container Apps provides the foundation for deploying microservices featuring:
+**Microservice architectures allow you to independently develop, upgrade, version, and scale core areas of functionality in an overall system. Azure Container Apps provides the foundation for deploying microservices featuring**:
 
-- Independent scaling, versioning, and upgrades
-- Service discovery
-- Native [Dapr](https://docs.dapr.io/concepts/overview/) integration
+- _Independent scaling, versioning, and upgrades_
+- _Service discovery_
+- _Native_ [Dapr](https://docs.dapr.io/concepts/overview/) integration
 
 #### Dapr integration
 
-When you implement a system composed of microservices, function calls are spread across the network. To support the distributed nature of microservices, you need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, use of Dapr provides an even richer microservices programming model. Dapr includes features like observability, pub/sub, and service-to-service invocation with mutual TLS, retries, and more.
+When you implement a system composed of microservices, functfion calls are spread across the network. To support the distributed nature of microservices, you need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, use of Dapr provides an even richer microservices programming model. **Dapr includes features like observability, pub/sub, and service-to-service invocation with mutual TLS, retries, and more**.
 
 ### Explore containers in Azure Container Apps
 
-Azure Container Apps manages the details of Kubernetes and container orchestration for you. Containers in Azure Container Apps can use any runtime, programming language, or development stack of your choice.
+**Azure Container Apps manages the details of Kubernetes and container orchestration for you. Containers in Azure Container Apps can use any runtime, programming language, or development stack of your choice.**
 
 ![Diagram showing how containers for an Azure Container App are grouped together in pods inside revision snapshots.](https://learn.microsoft.com/en-us/training/wwl-azure/implement-azure-container-apps/media/azure-container-apps-containers.png)
 
-Azure Container Apps supports any Linux-based x86-64 (`linux/amd64`) container image. There's no required base container image, and if a container crashes it automatically restarts.
+**Azure Container Apps supports any Linux-based x86-64 (`linux/amd64`) container image. There's no required base container image, and if a container crashes it automatically restarts.**
 
 #### Configuration
 
-The following code is an example of the `containers` array in the `properties.template` section of a container app resource template. The excerpt shows some of the available configuration options when setting up a container when using Azure Resource Manager (ARM) templates. Changes to the template ARM configuration section trigger a new container app revision.
+The following code is an example of the `containers` array in the `properties.template` section of a container app resource template. **The excerpt shows some of the available configuration options when setting up a container when using Azure Resource Manager (ARM) templates**. Changes to the template ARM configuration section trigger a new container app revision.
 
 ```jsonc
 "containers": [
@@ -546,10 +546,10 @@ The following code is an example of the `containers` array in the `properties.te
 
 You can define multiple containers in a single container app to implement the [sidecar pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar). The containers in a container app share hard disk and network resources and experience the same application lifecycle.
 
-Examples of sidecar containers include:
+**Examples of sidecar containers include:**
 
-- An agent that reads logs from the primary app container on a shared volume and forwards them to a logging service.
-- A background process that refreshes a cache used by the primary app container in a shared volume.
+- **An agent that reads logs from the primary app container on a shared volume and forwards them to a logging service.**
+- **A background process that refreshes a cache used by the primary app container in a shared volume.**
 
 :information_source: Running multiple containers in a single container app is an advanced use case. In most situations where you want to run multiple containers, such as when implementing a microservice architecture, deploy each service as a separate container app.
 
@@ -580,8 +580,17 @@ With the registry information added, the saved credentials can be used to pull a
 
 Azure Container Apps has the following limitations:
 
-- Privileged containers: Azure Container Apps can't run privileged containers. If your program attempts to run a process that requires root access, the application inside the container experiences a runtime error.
-- Operating system: Linux-based (`linux/amd64`) container images are required.
+- **Privileged containers: Azure Container Apps can't run privileged containers. If your program attempts to run a process that requires root access, the application inside the container experiences a runtime error.**
+- **Operating system: Linux-based (`linux/amd64`) container images are required.**
+Yes, there is a **hard limit** on the number of containers you can have in a single Azure Container Instance (ACI) **container group**:  
+- **Maximum number of containers per container group:** **60**  
+This limit cannot be increased through a support request[1].
+
+Other relevant hard limits for a container group include:
+- **Maximum number of volumes per container group:** 20
+- **Maximum ports per IP:** 5
+
+These limits ensure resource management and platform stability across all Azure regions[1][2].
 
 ### Implement authentication and authorization in Azure Container Apps
 
@@ -590,7 +599,7 @@ Azure Container Apps provides built-in authentication and authorization features
 - Azure Container Apps provides access to various built-in authentication providers.
 - The built-in auth features don’t require any particular language, SDK, security expertise, or even any code that you have to write.
 
-This feature should only be used with HTTPS. Ensure `allowInsecure` is disabled on your container app's ingress configuration. You can configure your container app for authentication with or without restricting access to your site content and APIs.
+**This feature should only be used with HTTPS. Ensure `allowInsecure` is disabled on your container app's ingress configuration. You can configure your container app for authentication with or without restricting access to your site content and APIs.**
 
 - To restrict app access only to authenticated users, set its Restrict access setting to **Require authentication**.
 - To authenticate but not restrict access, set its Restrict access setting to **Allow unauthenticated** access.
@@ -612,7 +621,7 @@ When you use one of these providers, the sign-in endpoint is available for user 
 
 #### Feature architecture
 
-The authentication and authorization middleware component is a feature of the platform that runs as a sidecar container on each replica in your application. When enabled, every incoming HTTP request passes through the security layer before being handled by your application.
+**The authentication and authorization middleware component is a feature of the platform that runs as a sidecar container on each replica in your application. When enabled, every incoming HTTP request passes through the security layer before being handled by your application.**
 
 ![Diagram showing requests being intercepted by a sidecar container interacting with identity providers before allowing traffic to the app container.](https://learn.microsoft.com/en-us/training/wwl-azure/implement-azure-container-apps/media/container-apps-authorization-architecture.png)
 
@@ -678,7 +687,7 @@ An updated or deleted secret doesn't automatically affect existing revisions in 
 
 Before you delete a secret, deploy a new revision that no longer references the old secret. Then deactivate all revisions that reference the secret.
 
-:information_source: Container Apps doesn't support Azure Key Vault integration. Instead, enable managed identity in the container app and use the Key Vault SDK in your app to access secrets.
+:information_source: **Container Apps doesn't support Azure Key Vault integration. Instead, enable managed identity in the container app and use the Key Vault SDK in your app to access secrets.**
 
 #### Defining secrets
 
@@ -698,7 +707,7 @@ az containerapp create \
   --secrets "queue-connection-string=$CONNECTION_STRING"
 ```
 
-After declaring secrets at the application level, you can reference them in environment variables when you create a new revision in your container app. When an environment variable references a secret, its value is populated with the value defined in the secret. To reference a secret in an environment variable in the Azure CLI, set its value to `secretref:`, followed by the name of the secret.
+**After declaring secrets at the application level, you can reference them in environment variables when you create a new revision in your container app. When an environment variable references a secret, its value is populated with the value defined in the secret. To reference a secret in an environment variable in the Azure CLI, set its value to secretref:, followed by the name of the secret.**
 
 The following example shows an application that declares a connection string at the application level. This connection is referenced in a container environment variable.
 
@@ -714,7 +723,7 @@ az containerapp create \
 
 ### Explore Dapr integration with Azure Container Apps
 
-The Distributed Application Runtime (Dapr) is a set of incrementally adoptable features that simplify the authoring of distributed, microservice-based applications. Dapr provides capabilities for enabling application intercommunication through messaging via pub/sub or reliable and secure service-to-service calls.
+**The Distributed Application Runtime (Dapr) is a set of incrementally adoptable features that simplify the authoring of distributed, microservice-based applications. Dapr provides capabilities for enabling application intercommunication through messaging via pub/sub or reliable and secure service-to-service calls.**
 
 Dapr is an open source, [Cloud Native Computing Foundation (CNCF)](https://www.cncf.io/projects/dapr/) project. The CNCF is part of the Linux Foundation and provides support, oversight, and direction for fast-growing, cloud native projects. As an alternative to deploying and managing the Dapr OSS project yourself, the Container Apps platform:
 
